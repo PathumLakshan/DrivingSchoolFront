@@ -1,26 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
 
 const appRoutes : Routes = [
-  { path: 'crisis-center', component: HomeComponent }
-  {
-    path: 'heroes',
-    component: HomeComponent,
-    data: { title: 'Heroes List' }
-  }
+ 
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
