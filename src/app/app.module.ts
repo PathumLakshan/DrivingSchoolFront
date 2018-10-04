@@ -1,28 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Routes, Route } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
+import { HttpErrorHandler }     from './http-error-handler.servie';
+import { MessageService }       from './message.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { UserComponent } from './user/user.component';
 
-const appRoutes : Routes = [
- 
+const appRoutes: Routes =[
+  {
+    path: 'home',
+    component: HomeComponent,
+    loadChildren: './home/home.module#HomeModule'
+  }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    UserComponent
+    HomeComponent
   ],
+
   imports: [
     BrowserModule,
-    NgbModule
+    HttpClientModule, // this module will give ability do request http request throughout the entire app
+    NgbModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)// this will use whatever the routes defined in const appRoutes array 
   ],
-  providers: [],
+  providers: [
+    HttpErrorHandler,
+    MessageService],
   bootstrap: [AppComponent]
 })
 
