@@ -10,19 +10,36 @@ import { HttpErrorHandler }     from './http-error-handler.servie';
 import { MessageService }       from './message.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { LogginComponent } from './loggin/loggin.component';
+
+
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 const appRoutes: Routes =[
   {
     path: 'home',
     component: HomeComponent,
     loadChildren: './home/home.module#HomeModule'
+  },
+  {
+    path: 'schedule',
+    component: ScheduleComponent
+  },
+  {
+    path: 'login',
+    component: LogginComponent
   }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ScheduleComponent,
+    LogginComponent
   ],
 
   imports: [
@@ -30,8 +47,11 @@ const appRoutes: Routes =[
     HttpClientModule, // this module will give ability do request http request throughout the entire app
     NgbModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)// this will use whatever the routes defined in const appRoutes array 
+    RouterModule.forRoot(appRoutes),// this will use whatever the routes defined in const appRoutes array 
+    MDBBootstrapModule.forRoot(),
+        AngularFontAwesomeModule
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     HttpErrorHandler,
     MessageService],

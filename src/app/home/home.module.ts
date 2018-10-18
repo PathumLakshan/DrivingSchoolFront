@@ -6,20 +6,25 @@ import { TraineeComponent } from './trainee/trainee.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { PaymentTypeComponent } from './payment-type/payment-type.component';
-
+import { FormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
+import { OwnerComponent } from './owner/owner.component';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ],
   declarations: [
     TrainerComponent,
     TraineeComponent,
     CandidateComponent,
     VehicleComponent,
-    PaymentTypeComponent
+    PaymentTypeComponent,
+    OwnerComponent
   ]
 })
 export class HomeModule {}

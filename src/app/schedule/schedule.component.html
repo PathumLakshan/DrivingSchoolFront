@@ -1,0 +1,60 @@
+<h3>Schedule Creation</h3>
+<div class="container" style="padding-top: 30px">
+  <div class="row">
+  <div class="col-6">
+
+  Trainees: 
+  <select class="form-control" (input)="onInput($event)" name="traineeid" [(ngModel)]="tempschedule.trainee">
+    <option *ngFor="let trainee of trainees" [ngValue]="trainee">{{ trainee.trainee_name}}</option>
+  </select>
+  <li *ngFor="let trainee of trainees"><a>{{ trainee.trainee_name }}</a></li>
+  
+  <br>
+  Trainers: 
+   
+  <select class="form-control" (input)="onInput($event)" name="trainerid" [(ngModel)]="tempschedule.trainer">
+    <option *ngFor="let trainer of trainers" [ngValue]="trainer">{{ trainer.trainer_name}}</option>
+  </select>
+  
+  <br>
+  
+  Vehicles:
+  <select class="form-control" (input)="onInput($event)" name="vehicleid" [(ngModel)]="tempschedule.vehicle">
+    <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{ vehicle.description }}<span> {{vehicle.v_reg }}</span></option>
+  </select>
+  
+  <br>
+  
+  Time : 
+  <input class="form-control" type="number" id="noh" [(ngModel)]="tempschedule.time"/>
+  <br>
+  <div class="buttun-group">
+      <button class="btn btn-warning" (click)='addData()' >Add</button>
+      <button class="btn btn-success" (click)="showData()">ShowData</button>
+  </div>
+  
+</div>
+  
+  <div class="col-6">
+    
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">TrainerName</th>
+        <th scope="col">TraineeName</th>
+        <th scope="col">Time</th>
+        <th scope="col">Vehicle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
+        <td>{{ schedule.trainer.trainer_name }}</td>
+        <td>{{ schedule.trainee.trainee_name}}</td>
+        <td>{{ schedule.time}}</td>
+        <td>{{ schedule.vehicle.v_reg }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+ </div>
+</div>
