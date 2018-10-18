@@ -2,12 +2,14 @@
 <div class="container" style="padding-top: 30px">
   <div class="row">
   <div class="col-6">
-
+<mdb-card>
+    <mdb-card-body>
+        <mdb-card-title> <h4>Schedule Creation</h4> </mdb-card-title>
   Trainees: 
   <select class="form-control" (input)="onInput($event)" name="traineeid" [(ngModel)]="tempschedule.trainee">
     <option *ngFor="let trainee of trainees" [ngValue]="trainee">{{ trainee.trainee_name}}</option>
   </select>
-  <li *ngFor="let trainee of trainees"><a>{{ trainee.trainee_name }}</a></li>
+
   
   <br>
   Trainers: 
@@ -25,16 +27,20 @@
   
   <br>
   
-  Time : 
-  <input class="form-control" type="number" id="noh" [(ngModel)]="tempschedule.time"/>
+  StartTime:
+  <input class="form-control" type="time" id="StartTime" [(ngModel)]="tempschedule.stime"/>
   <br>
+  EndTime:
+  <input class="form-control" type="time" id="EndTime" [(ngModel)]="tempschedule.etime"/>
+  
   <div class="buttun-group">
       <button class="btn btn-warning" (click)='addData()' >Add</button>
       <button class="btn btn-success" (click)="showData()">ShowData</button>
   </div>
-  
+</mdb-card-body>
+</mdb-card>
 </div>
-  
+
   <div class="col-6">
     
   <table class="table">
@@ -42,7 +48,8 @@
       <tr>
         <th scope="col">TrainerName</th>
         <th scope="col">TraineeName</th>
-        <th scope="col">Time</th>
+        <th scope="col">StartTime</th>
+        <th scope="col">EndTime</th>
         <th scope="col">Vehicle</th>
       </tr>
     </thead>
@@ -50,7 +57,8 @@
       <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
         <td>{{ schedule.trainer.trainer_name }}</td>
         <td>{{ schedule.trainee.trainee_name}}</td>
-        <td>{{ schedule.time}}</td>
+        <td>{{ schedule.stime}}</td>
+        <td>{{ schedule.etime}}</td>
         <td>{{ schedule.vehicle.v_reg }}</td>
       </tr>
     </tbody>
