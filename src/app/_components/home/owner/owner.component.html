@@ -1,0 +1,26 @@
+<div class="container">
+  <mdb-card>
+      <mdb-card-body>
+          <mdb-card-title><h3>New Owner</h3></mdb-card-title>
+              <form name="form" (ngSubmit)="add()" #f="ngForm">
+                  <div class="form-group">
+                      <label for="ownerName">Owner Name: </label>
+                      <input class="form-control" type="text" id="owner" name="owner" [(ngModel)]="owner.name">
+                      {{owner.name}}
+                      <br>
+                      <label><h3>Vehicles</h3></label>
+                      <br>
+                      <label for="vReg">Vehicle Reg Number:</label>
+                      <input class="form-control" type="text" id="vreg" name="vreg" [(ngModel)]="vehicle.regNo">
+                      {{vehicle.regNo}}
+                      <label for="vDesc">Vehicle Description</label>
+                      <input class="form-control" type="text" id="vdesc" name="vdesc" [(ngModel)]="vehicle.desc">
+                      {{vehicle.desc}}    
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary">Register</button>
+                  </div>
+              </form>
+      </mdb-card-body>
+  </mdb-card>
+</div>

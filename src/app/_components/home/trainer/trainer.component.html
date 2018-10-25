@@ -1,0 +1,23 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title><h3>New Trainer</h3></mdb-card-title>
+  <form name="form" (ngSubmit)="add()" #f="ngForm">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Trainer Name</label>
+      <input type="text" name="trainerName" class="form-control" [(ngModel)]="newTrainer.trainer_name">
+    </div>
+   <button class="btn btn-success" > AddNew Trainer</button>
+  </form>
+  </mdb-card-body>
+  </mdb-card>
+
+    </div>
+  </div>
+  </div>
+  <ul *ngFor='let trainer of trainers'>
+    <li>{{trainer.trainer_name}}</li>
+  </ul>

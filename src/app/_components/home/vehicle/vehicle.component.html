@@ -1,0 +1,30 @@
+<div class="container">
+        <mdb-card>
+                <mdb-card-body>
+                  <mdb-card-title><h3>New Vehicle</h3></mdb-card-title>
+              <form name="form" (ngSubmit)="add()" #f="ngForm">
+  
+                  <div class="form group">
+                      <label for="exampleFormControlInput1">Owner Name</label>
+
+                      <select class="form-control" name="candid" [(ngModel)]="vehicle.owner_id">
+                        <option *ngFor="let owner of owners" value={{owner.owner_id}}>{{ owner.owner_name}}</option>
+                      </select>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <input type="text" class="form-control" name="desc" [(ngModel)]="vehicle.description">
+                    
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">RegID</label>
+                      <input type="text" class="form-control" name="reg" [(ngModel)]="vehicle.v_reg">
+                      <h5 ng-bind="regid"></h5>
+                    </div>
+                  <h5>{{vehicle.v_reg}}{{vehicle.description}}{{vehicle.owner_id}}</h5>
+                  <button class="btn btn-success"> AddNew Vehicle</button>
+                </form>
+  </mdb-card-body>
+  </mdb-card>   
+  </div>
