@@ -40,7 +40,7 @@ private handleError : HandleError
     }
 
     updateTrainee(trainee: Trainee){
-      return this.http.put<Trainee>(this.apiurl,httOptions).pipe(
+      return this.http.put<Trainee>(this.apiurl,trainee,httOptions).pipe(
         catchError(this.handleError('updateTrainee', trainee))
       );
     }

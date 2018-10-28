@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { HttpErrorHandler, HandleError } from '../_helpers/http-error-handler.service';// to access different directory need to use ..
 
-import { Owner } from "../_models/owner";
+import { PaymentType } from "../_models/paymentType";
 
 
 const httOptions ={
@@ -17,27 +17,27 @@ const httOptions ={
 };
 
 @Injectable()
-export class OwnerService {
-apiurl = 'https://localhost:44323/api/owner';
+export class PaymentTypeService {
+apiurl = 'https://localhost:44323/api/paymenttype';
 private handleError : HandleError
 
   constructor(
     private http:HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-      this.handleError = httpErrorHandler.createHandleError('OwnerService');
+      this.handleError = httpErrorHandler.createHandleError('PaymentTypeService');
       }
   
-    getOwner(): Observable<Owner[]>{
-      return this.http.get<Owner[]>(this.apiurl)
+    getPaymentTypes(): Observable<PaymentType[]>{
+      return this.http.get<PaymentType[]>(this.apiurl)
                   .pipe(
-                    catchError(this.handleError('getOwner', []))
+                    catchError(this.handleError('getPaymentType', []))
                   );
     }
 
-    addOwner(owner: Owner): Observable<Owner>{
-      return this.http.post<Owner>(
-        this.apiurl, owner,httOptions).pipe(
-          catchError(this.handleError('addOwner',owner))
+    addPaymentType(ptype: PaymentType): Observable<PaymentType>{
+      return this.http.post<PaymentType>(
+        this.apiurl, ptype,httOptions).pipe(
+          catchError(this.handleError('addPaymentType',ptype))
         );
     }
   

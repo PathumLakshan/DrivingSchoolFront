@@ -17,7 +17,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
-  imports: [
+  imports: [  
     CommonModule,
     HomeRoutingModule,
     FormsModule,

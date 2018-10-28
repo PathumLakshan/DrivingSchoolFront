@@ -16,7 +16,7 @@ editTrainer : Trainer;
   constructor(private trainerService: TrainerService) { }
 
   ngOnInit() {
-    this.get();
+   // this.get();
   }
 
   edit(trainer){

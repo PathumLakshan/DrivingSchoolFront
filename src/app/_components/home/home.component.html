@@ -30,13 +30,13 @@
   </nav>
   <br>
   <br>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 <div *ngIf="loading" class="alert alert-danger">
   <img  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 </div>
 {{userRole}}
    <h1 *ngIf='userRole == "staff" '>Todays Schedule</h1>
-<!--<div class="container" >
+<div class="container" *ngIf='userRole == "staff" '>
 
   <div class="col-md-6">
     <table class="table">
@@ -51,15 +51,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
+        <!-- <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
           <td>{{ schedule.date }}</td>
           <td>{{ schedule.trainer.trainer_name }}</td>
           <td>{{ schedule.trainee.trainee_name }}</td>
           <td>{{ schedule.stime }}</td>
           <td>{{ schedule.etime }}</td>
           <td>{{ schedule.vehicle.v_reg }}</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
-</div>-->
+</div>

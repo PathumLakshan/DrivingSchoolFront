@@ -26,8 +26,8 @@ candidates: Candidate[]
 
   add(){
     console.log(this.candidate)
-    //  this.candidateService.addCandidate(this.candidate).subscribe(
-    //    (res) => console.log('response',res)
-    //  );  
+     this.candidateService.addCandidate(this.candidate).subscribe(
+       (res) => console.log('response',res)
+     );  
   }
 }

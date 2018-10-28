@@ -9,6 +9,8 @@ import { Trainee } from '../_models/trainee';
 import { Trainer } from '../_models/trainer';
 import { Vehicle } from '../_models/vehicle';
 
+import { Schedule } from '../_models/schedule';
+
 const httpOptions ={
   headers: new HttpHeaders({
     'Content-Type':'application/json',
@@ -35,6 +37,7 @@ private handleError : HandleError
       this.handleError = httpErrorHandler.createHandleError('VehicleService');  
       }
   
+    //GET Methods
     getTrainee(): Observable<Trainee[]>{
       return this.http.get<Trainee[]>(this.traineeapiurl,httpOptions)
                   .pipe(
@@ -54,6 +57,16 @@ private handleError : HandleError
                   .pipe(
                     catchError(this.handleError('getVehicle', []))
                   );
-    }   
+    }
+    
+    // POST Methods
+
+    createSchedule(schedule: Schedule){
+      return this.http.post(this.createUrl,schedule,httpOptions)
+                  .pipe(
+                    catchError(this.handleError('Create Schedule',[]))
+                  );
+    }
+    
   
 }

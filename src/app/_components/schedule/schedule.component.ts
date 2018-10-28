@@ -59,8 +59,5 @@ tempschedule: any = [];
   addData(){
   this.schedules.push(Object.assign({}, this.tempschedule));
   }
-
-  /*onSumit(){
-    this.scheduleService.
-  }*/
+  
 }
