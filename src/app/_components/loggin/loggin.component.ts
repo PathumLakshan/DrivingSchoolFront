@@ -28,6 +28,7 @@ error = '';
   }
 
   userLogin(){
+   // this.router.navigate(['home']);
     this.submitted = true;
     alert('a')
     this.loading = true;

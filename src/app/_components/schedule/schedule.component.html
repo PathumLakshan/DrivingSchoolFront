@@ -5,9 +5,18 @@
 <mdb-card>
     <mdb-card-body>
         <mdb-card-title> <h4>Schedule Creation</h4> </mdb-card-title>
+        Date: 
+        <input class="form-control" type="date" id="date" [(ngModel)]="tempschedule.date"/>
+
+        StartTime:
+        <input class="form-control" type="time" id="StartTime" [(ngModel)]="tempschedule.start_time"/>
+        <br>
+        EndTime:
+        <input class="form-control" type="time" id="EndTime" [(ngModel)]="tempschedule.end_time"/>
+        
   Trainees: 
   <select class="form-control" (input)="onInput($event)" name="traineeid" [(ngModel)]="tempschedule.trainee">
-    <option *ngFor="let trainee of trainees" [ngValue]="trainee">{{ trainee.trainee_name}}</option>
+    <option *ngFor="let trainee of trainees" [ngValue]="trainee.trainee_id">{{ trainee.trainee_name}}</option>
   </select>
 
   
@@ -15,7 +24,7 @@
   Trainers: 
    
   <select class="form-control" (input)="onInput($event)" name="trainerid" [(ngModel)]="tempschedule.trainer">
-    <option *ngFor="let trainer of trainers" [ngValue]="trainer">{{ trainer.trainer_name}}</option>
+    <option *ngFor="let trainer of trainers" [ngValue]="trainer.trainer_id">{{ trainer.trainer_name}}</option>
   </select>
   
   <br>
@@ -27,14 +36,8 @@
   
   <br>
   
-  StartTime:
-  <input class="form-control" type="time" id="StartTime" [(ngModel)]="tempschedule.stime"/>
-  <br>
-  EndTime:
-  <input class="form-control" type="time" id="EndTime" [(ngModel)]="tempschedule.etime"/>
-  
-  Date: 
-  <input class="form-control" type="date" id="date" [(ngModel)]="tempschedule.date"/>
+ 
+ 
   
   <div class="buttun-group">
       <button class="btn btn-warning" (click)='addData()' >Add</button>
@@ -62,8 +65,8 @@
         <td>{{ schedule.date }}</td>
         <td>{{ schedule.trainer.trainer_name }}</td>
         <td>{{ schedule.trainee.trainee_name }}</td>
-        <td>{{ schedule.stime }}</td>
-        <td>{{ schedule.etime }}</td>
+        <td>{{ schedule.start_time }}</td>
+        <td>{{ schedule.end_time }}</td>
         <td>{{ schedule.vehicle.v_reg }}</td>
       </tr>
     </tbody>

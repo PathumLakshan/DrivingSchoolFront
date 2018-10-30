@@ -1,13 +1,11 @@
 import { RouterModule, Routes} from '@angular/router';
 import { LogginComponent } from '../_components/loggin/loggin.component';
 import { ScheduleComponent } from '../_components/schedule/schedule.component';
-import { HomeComponent } from '../_components/home/home.component';
 import { AuthGuard } from '../_guards/auth.guard';
 
 const appRoutes: Routes =[
     {
       path: 'home',
-      component: HomeComponent,
       loadChildren: '../_components/home/home.module#HomeModule',
       canActivate: [AuthGuard]
     },
