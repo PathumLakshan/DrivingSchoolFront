@@ -61,7 +61,7 @@ private handleError : HandleError
     
     // POST Methods
 
-    createSchedule(schedule: Schedule){
+    createSchedule(schedule){
       return this.http.post(this.createUrl,schedule,httpOptions)
                   .pipe(
                     catchError(this.handleError('Create Schedule',[]))

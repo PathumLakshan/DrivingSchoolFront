@@ -1,8 +1,8 @@
 export interface Schedule{
-    date:Date,
-    start_time:number,
-    end_time:number,
-    trainee_id:number,
-    trainer_id:number,
-    v_id:number
+    date:any,
+    start_time:any,
+    end_time:any,
+    trainee_id:any,
+    trainer_id:any,
+    v_id:any
 }

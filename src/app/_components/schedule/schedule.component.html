@@ -6,42 +6,44 @@
     <mdb-card-body>
         <mdb-card-title> <h4>Schedule Creation</h4> </mdb-card-title>
         Date: 
-        <input class="form-control" type="date" id="date" [(ngModel)]="tempschedule.date"/>
+        <input class="form-control" type="date" id="date" [(ngModel)]="TempSession_Array.date"/>
 
         StartTime:
-        <input class="form-control" type="time" id="StartTime" [(ngModel)]="tempschedule.start_time"/>
+        <input class="form-control" type="time" id="StartTime" [(ngModel)]="TempSession_Array.start_time"/>
         <br>
         EndTime:
-        <input class="form-control" type="time" id="EndTime" [(ngModel)]="tempschedule.end_time"/>
+        <input class="form-control" type="time" id="EndTime" [(ngModel)]="TempSession_Array.end_time"/>
         
   Trainees: 
-  <select class="form-control" (input)="onInput($event)" name="traineeid" [(ngModel)]="tempschedule.trainee">
-    <option *ngFor="let trainee of trainees" [ngValue]="trainee.trainee_id">{{ trainee.trainee_name}}</option>
+  <select class="form-control" (input)="onInput($event)" 
+  name="traineeid" [(ngModel)]="TempSession_Array.trainee" >
+  <option>Select Trainee...</option>
+    <option *ngFor="let trainee of trainees" [ngValue]="trainee">{{ trainee.trainee_name}}</option>
   </select>
 
   
   <br>
   Trainers: 
    
-  <select class="form-control" (input)="onInput($event)" name="trainerid" [(ngModel)]="tempschedule.trainer">
-    <option *ngFor="let trainer of trainers" [ngValue]="trainer.trainer_id">{{ trainer.trainer_name}}</option>
+  <select class="form-control" (input)="onInput($event)" 
+  name="trainerid" [(ngModel)]="TempSession_Array.trainer" >
+    <option *ngFor="let trainer of trainers" [ngValue]="trainer">{{ trainer.trainer_name}}</option>
   </select>
   
   <br>
   
   Vehicles:
-  <select class="form-control" (input)="onInput($event)" name="vehicleid" [(ngModel)]="tempschedule.vehicle">
+  <select class="form-control" (input)="onInput($event)" 
+  name="vehicleid" [(ngModel)]="TempSession_Array.vehicle">
     <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{ vehicle.description }}<span> {{vehicle.v_reg }}</span></option>
   </select>
   
   <br>
-  
- 
- 
-  
-  <div class="buttun-group">
+  <div class="button-group">
       <button class="btn btn-warning" (click)='addData()' >Add</button>
       <button class="btn btn-success" (click)="showData()">ShowData</button>
+      
+      <button class="btn btn-success" (click)="sendData()">SendData</button>
   </div>
 </mdb-card-body>
 </mdb-card>
@@ -53,7 +55,9 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Date</th>
+        <th scope="col">TrainerId</th>
         <th scope="col">TrainerName</th>
+        <th scope="col">TraineeId</th>
         <th scope="col">TraineeName</th>
         <th scope="col">StartTime</th>
         <th scope="col">EndTime</th>
@@ -61,13 +65,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
-        <td>{{ schedule.date }}</td>
-        <td>{{ schedule.trainer.trainer_name }}</td>
-        <td>{{ schedule.trainee.trainee_name }}</td>
-        <td>{{ schedule.start_time }}</td>
-        <td>{{ schedule.end_time }}</td>
-        <td>{{ schedule.vehicle.v_reg }}</td>
+      <tr *ngFor="let Session of Sessions_Array"  class=" table table-success table-striped">
+        <td>{{ Session.date }}</td>
+        <td>{{ Session.trainer.trainer_id }}</td>
+        <td>{{ Session.trainer.trainer_name }}</td>
+        <td>{{ Session.trainee.reg_id }}</td>
+        <td>{{ Session.trainee.trainee_name }}</td>
+        <td>{{ Session.start_time }}</td>
+        <td>{{ Session.end_time }}</td>
+        <td>{{ Session.vehicle.v_reg }}<span></span>{{ Session.vehicle.description }}</td>
       </tr>
     </tbody>
   </table>
