@@ -1,3 +1,4 @@
+<button mdbBtn type="button" color="default" outline="true" mdbWavesEffect routerLink="home">BacktoHome</button>
 <h3>Schedule Creation</h3>
 <div class="container" style="padding-top: 30px">
   <div class="row">
@@ -74,6 +75,7 @@
         <td>{{ Session.start_time }}</td>
         <td>{{ Session.end_time }}</td>
         <td>{{ Session.vehicle.v_reg }}<span></span>{{ Session.vehicle.description }}</td>
+        <td><button class="btn btn-primary" (click)="getId(Session.trainer.trainer_id)">GetId</button></td>
       </tr>
     </tbody>
   </table>

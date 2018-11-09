@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <a class="navbar-brand" routerLink="/home"> Home </a>
     <a class="navbar-brand" routerLink="/schedule"> Schedule </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,10 @@
 <div *ngIf="loading" class="alert alert-danger">
   <img  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 </div>
-{{userRole}}
    <h1 *ngIf='userRole == "staff" '>Todays Schedule</h1>
-<div class="container" *ngIf='userRole == "staff" '>
-
+<div class="container" *ngIf='isHome'>
+<button class="btn btn-primary" (click)="loadData()">ShowSchedule</button>
+<br/>
   <div class="col-md-6">
     <table class="table">
       <thead class="thead-dark">
@@ -52,25 +52,19 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
+         <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
           <td>{{ schedule.date }}</td>
-          <td>{{ schedule.trainer.trainer_name }}</td>
-          <td>{{ schedule.trainee.trainee_name }}</td>
-          <td>{{ schedule.stime }}</td>
-          <td>{{ schedule.etime }}</td>
-          <td>{{ schedule.vehicle.v_reg }}</td>
-        </tr> -->
+          <td>{{ schedule.trainer_name }}</td>
+          <td>{{ schedule.trainee_name }}</td>
+          <td>{{ schedule['start-time'] }}</td>
+          <td>{{ schedule['end-time'] }}</td>
+          <td>{{ schedule.v_reg }}</td>
+          
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<h3>FK</h3>
-<h2>WHTF</h2>
-
-<h3>FK</h3>
-<h2>WHTF</h2>
-<h3>FK</h3>
-<h2>WHTF</h2>
 
 <router-outlet></router-outlet>

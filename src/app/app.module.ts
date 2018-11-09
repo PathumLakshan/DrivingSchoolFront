@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { routing } from './_routing-modules/app-routing.module';
+import { routing } from './app-routing.module';
 import { HttpErrorHandler }     from './_helpers/http-error-handler.service';
 import { MessageService }       from './_helpers/message.service';
 

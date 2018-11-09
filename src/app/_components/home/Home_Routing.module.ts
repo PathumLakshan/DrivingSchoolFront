@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes} from '@angular/router';
 
-import { TrainerComponent } from '../_components/home/trainer/trainer.component';
-import { TraineeComponent } from '../_components/home/trainee/trainee.component';
-import { CandidateComponent } from '../_components/home/candidate/candidate.component';
-import { VehicleComponent } from '../_components/home/vehicle/vehicle.component';
-import { OwnerComponent } from '../_components/home/owner/owner.component';
-import { PaymentTypeComponent } from '../_components/home/payment-type/payment-type.component';
-import { HomeComponent } from '../_components/home/home.component';
-import { AuthGuard } from '../_guards/auth.guard';
+import { TrainerComponent } from './trainer/trainer.component';
+import { TraineeComponent } from './trainee/trainee.component';
+import { CandidateComponent } from './candidate/candidate.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { OwnerComponent } from './owner/owner.component';
+import { PaymentTypeComponent } from './payment-type/payment-type.component';
+//import { HomeComponent } from './home.component';
+import { AuthGuard } from '../../_guards/auth.guard';
 
 const homeroutes : Routes =[
    {
     path: '',
-    component: HomeComponent,
+    //component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
           { path: 'trainer', component: TrainerComponent,canActivate: [AuthGuard] },

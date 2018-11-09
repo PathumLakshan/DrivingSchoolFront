@@ -59,6 +59,12 @@ private handleError : HandleError
                   );
     }
     
+    getSchedule():Observable<Schedule[]>{
+      return this.http.get<Schedule[]>(this.createUrl,httpOptions)
+      .pipe(
+        catchError(this.handleError('getSchedule',[]))
+      )
+    }
     // POST Methods
 
     createSchedule(schedule){

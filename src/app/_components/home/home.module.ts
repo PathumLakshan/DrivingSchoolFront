@@ -8,7 +8,7 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { PaymentTypeComponent } from './payment-type/payment-type.component';
 import { FormsModule } from '@angular/forms';
 
-import { HomeRoutingModule } from '../../_routing-modules/home-routing.module';
+import { HomeRoutingModule } from './Home_Routing.module';
 import { OwnerComponent } from './owner/owner.component';
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';

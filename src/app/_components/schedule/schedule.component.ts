@@ -37,6 +37,10 @@ FinalSchedule_Array: any =[];       //finalfinalS
     this.getVehicle()
   }
 
+  getId(id){
+    alert(id)
+  }
+
   getTrainers():void{
     this.scheduleService.getTrainer().subscribe(
       trainers => this.trainers = trainers
@@ -84,7 +88,6 @@ FinalSchedule_Array: any =[];       //finalfinalS
 
   addData(){
     this.Sessions_Array.push( Object.assign([], this.TempSession_Array));
-    console.log(this.FilteredSession_Array)
   }
   
   sendData(){
