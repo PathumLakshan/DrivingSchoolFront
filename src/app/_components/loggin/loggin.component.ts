@@ -10,13 +10,13 @@ import { AuthenticationService } from '../../_services/authentication.service';
 }) 
 
 export class LogginComponent implements OnInit {
-login:  any= {};
+login:  any = {};
 loading = false;
 submitted = false;
 returnUrl: string;
 error = '';
 
-  constructor( 
+  constructor(
     private router: Router,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService) { }
@@ -27,22 +27,25 @@ error = '';
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  userLogin(){
-   // this.router.navigate(['home']);
+  userLogin() {
     this.submitted = true;
-    alert('a')
     this.loading = true;
     this.authenticationService.login(this.login.userName, this.login.password)
     .pipe(first())
     .subscribe(
         data => {
             this.router.navigate(['home']);
-            console.log(data)   
         },
         error => {
-          console.log(error)
-            this.error = error.message;
-            this.loading = false;
-        });
+          console.log(error);
+          this.loading = false;
+          this.clearFields();
+        }
+        );
+      }
+
+      clearFields(): void {
+        this.login.userName = null;
+        this.login.password = null;
       }
 }

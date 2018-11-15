@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwnerService } from '../../../_services/owner.service';
+import { Owner } from '../../../_models/owner';
 
 @Component({
   selector: 'app-owner',
@@ -9,21 +10,33 @@ import { OwnerService } from '../../../_services/owner.service';
 })
 export class OwnerComponent implements OnInit {
 
-owner: any={};
-vehicle: any={};
-
-  constructor(private ownerService: OwnerService) { }
+owner: any = {};
+vehicle: any = {};
+owners: Owner[];
+loading: boolean;
+RoleId: number;
+ 
+constructor(private ownerService: OwnerService) { }
 
   ngOnInit() {
+    this.RoleId = parseInt( sessionStorage.getItem('roleId'));
   }
 
-  add(){
-    console.log('beforeSubmit')
+  get(): void {
+    this.loading = true;
+    this.ownerService.getOwner().subscribe(
+      (res) => {
+        console.log(res);
+        this.owners = res;
+        this.loading = false;
+      }
+    )
+  }
+
+  add() {
     this.ownerService.addOwner(this.owner).subscribe(
       (res) => console.log('Response', res)
     );
-    alert('Submitted !')
-    console.log(this.owner)
-    console.log(this.vehicle)
   }
+
 }

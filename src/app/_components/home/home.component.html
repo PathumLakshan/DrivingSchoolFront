@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+<!-- #region Admin NavBar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf='RoleId == 1'>
     <a class="navbar-brand" routerLink="/home"> Home </a>
     <a class="navbar-brand" routerLink="/schedule"> Schedule </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,50 +22,164 @@
         <li class="nav-item"> 
           <a routerLink="owner" routerLinkActive="active">Owner</a>
         </li>
-        <li class="nav-item"> 
+        <!-- <li class="nav-item"> 
           <a routerLink="paymenttype" routerLinkActive="active">Payment Type</a>
+        </li> -->
+       </ul>
+      
+    </div>
+    <a class="navbar-nav" style="background-color:burlywood" (click)="LogOut()">LogOut</a>
+  </nav>
+   <!-- #endregion -->
+<!-- #region Trainer Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf='RoleId == 3'>
+    <a class="navbar-brand" routerLink="/home"> Home </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a routerLink="trainee" routerLinkActive="active">Trainee</a>
+        </li>
+        <li class="nav-item"> 
+          <a routerLink="vehicle" routerLinkActive="active">Vehicle</a>
+        </li>
+        <li class="nav-item"> 
+          <a routerLink="owner" routerLinkActive="active">Owner</a>
+        </li>
+       </ul>
+    </div>
+    <a class="navbar-nav" style="background-color:burlywood" (click)="LogOut()">LogOut</a>
+  </nav>
+   <!-- #endregion -->
+<!-- #region Trainee NavBar -->
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf='RoleId == 2'>
+    <a class="navbar-brand" routerLink="/home"> Home </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a routerLink="trainer" routerLinkActive="active">Trainer</a>
+        </li>
+        <li class="nav-item"> 
+          <a routerLink="vehicle" routerLinkActive="active">Vehicle</a>
         </li>
        </ul>
       
     </div>
     <a class="navbar-nav" style="background-color:burlywood" (click)="LogOut()">LogOut</a>
   </nav>
-  <br>
-  <br>
-  
-<div *ngIf="loading" class="alert alert-danger">
-  <img  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  <!-- #endregion -->
+<br>
+
+<!-- {{RoleId}}
+{{userId}}
+{{isLoggedIn}} -->
+<!-- #region Staff Schedule View-->
+<div *ngIf='loading'>
+  <img src="assets/SpinLoader.gif" width="50" alt="" id="loader">
 </div>
-   <h1 *ngIf='userRole == "staff" '>Todays Schedule</h1>
-<div class="container" *ngIf='isHome'>
-<button class="btn btn-primary" (click)="loadData()">ShowSchedule</button>
-<br/>
-  <div class="col-md-6">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">TrainerName</th>
-          <th scope="col">TraineeName</th>
-          <th scope="col">StartTime</th>
-          <th scope="col">EndTime</th>
-          <th scope="col">Vehicle</th>
-        </tr>
-      </thead>
-      <tbody>
-         <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
-          <td>{{ schedule.date }}</td>
-          <td>{{ schedule.trainer_name }}</td>
-          <td>{{ schedule.trainee_name }}</td>
-          <td>{{ schedule['start-time'] }}</td>
-          <td>{{ schedule['end-time'] }}</td>
-          <td>{{ schedule.v_reg }}</td>
-          
-        </tr>
-      </tbody>
-    </table>
+<div class="container" *ngIf='isHome && RoleId ==1'>
+  <button class="btn btn-primary" (click)="loadData()">ShowSchedule</button>
+  <br/>
+    <div class="col-md-6">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">TrainerName</th>
+            <th scope="col">TraineeName</th>
+            <th scope="col">StartTime</th>
+            <th scope="col">EndTime</th>
+            <th scope="col">Vehicle</th>
+          </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
+            <td>{{ schedule.date }}</td>
+            <td>{{ schedule.trainer_name }}</td>
+            <td>{{ schedule.trainee_name }}</td>
+            <td>{{ schedule['start-time'] }}</td>
+            <td>{{ schedule['end-time'] }}</td>
+            <td>{{ schedule.v_reg }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+<!-- #endregion -->
+<!-- #region Trainer Schedule View-->
+<h1 *ngIf='isHome && RoleId == 3 '>Todays Schedule For Trainer</h1>
+<div *ngIf='loading'>
+  <img src="assets/SpinLoader.gif" width="50" alt="" id="loader">
+</div>
+<div class="container" *ngIf="isHome && RoleId == 3">
+  <button class="btn btn-primary" (click)="loadData()">ShowSchedule</button>
+  <br/>
+    <div class="col-md-6">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">TraineeName</th>
+            <th scope="col">StartTime</th>
+            <th scope="col">EndTime</th>
+            <th scope="col">Vehicle</th>
+          </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let schedule of scheduleForTrainer"  class=" table table-success table-striped">
+            <td>{{ schedule.date }}</td>
+            <td>{{ schedule.trainee_name }}</td>
+            <td>{{ schedule['start-time'] }}</td>
+            <td>{{ schedule['end-time'] }}</td>
+            <td>{{ schedule.v_reg }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- #endregion -->
+<!-- #region Trainee Schedule View-->
+<div *ngIf='loading'>
+  <img src="assets/SpinLoader.gif" width="50" alt="" id="loader">
 </div>
 
+<div class="container" *ngIf="isHome && RoleId==2">
+    <button class="btn btn-primary" (click)="loadData()">ShowSchedule</button>
+  <br/>
+    <div class="col-md-6">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">TrainerName</th>
+            <th scope="col">StartTime</th>
+            <th scope="col">EndTime</th>
+            <th scope="col">Vehicle</th>
+          </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let schedule of schedules"  class=" table table-success table-striped">
+            <td>{{ schedule.date }}</td>
+            <td>{{ schedule.trainer_name }}</td>
+            <td>{{ schedule['start-time'] }}</td>
+            <td>{{ schedule['end-time'] }}</td>
+            <td>{{ schedule.v_reg }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- #endregion -->
 
+<!-- #region Router Outlet-->
 <router-outlet></router-outlet>
+<!-- #endregion -->

@@ -11,33 +11,38 @@ import { Owner } from '../../../_models//owner';
   providers:[VehicleService, OwnerService]
 })
 export class VehicleComponent implements OnInit {
-ownerName:'';
+ownerName: '';
 vehicles: Vehicle[];
-vehicle: any ={};
+vehicle: any = {};
 owners: Owner[];
+loading: boolean;
+RoleId: number;
 
   constructor(private vehicleServie: VehicleService, private ownerService: OwnerService) { }
 
   ngOnInit() {
-    this.getOwner();
-    this.get();
+    this.RoleId = parseInt( sessionStorage.getItem('roleId'));
+  
   }
 
   get():void{
+    this.loading = true;
     this.vehicleServie.getVehicle().subscribe(
-      vehicles => this.vehicles = vehicles
+      (vehicles) => {
+        this.vehicles = vehicles;
+        this.ownerService.getOwner().subscribe(
+          (owners) => {
+            this.owners = owners;
+            this.loading = false;
+          }
+        );
+      }
     );
   }
 
-  add(){
+  add() {
      this.vehicleServie.addVehicle(this.vehicle).subscribe(
-       (res) => console.log('response',res)
-     );  
-  }
-
-  getOwner():void{
-    this.ownerService.getOwner().subscribe(
-      owners => this.owners = owners
-    )
+       (res) => console.log('response', res)
+     );
   }
 }

@@ -10,45 +10,51 @@ import { Trainer } from '../../../_models/trainer';
 })
 export class TrainerComponent implements OnInit {
 trainers: Trainer[];
-newTrainer: any={};
-editTrainer : Trainer;
-
+newTrainer: any = {};
+editTrainer: Trainer;
+radioModel: string;
+laoding: boolean;
+RoleId: number;
+    
   constructor(private trainerService: TrainerService) { }
 
   ngOnInit() {
-   // this.get();
+  
+  this.RoleId = parseInt( sessionStorage.getItem('roleId'));
   }
 
-  edit(trainer){
+  edit(trainer) {
     this.editTrainer = trainer;
   }
 
-  get():void{
-    this.trainerService.getTrainer().subscribe(
-      trainers => this.trainers = trainers
-    );
+  getId(id: number) {
+    alert(id);
   }
+  
+  get(): void {
+    this.laoding = true;
+    this.trainerService.getTrainer().subscribe(
+      (trainers) => {this.trainers = trainers;
+         this.laoding = false;
+        });
+       }
 
-  add(){
+  add() {
     this.trainerService.addTrainer(this.newTrainer).subscribe(
-      (res) => alert('Success !')
+      (res) => console.log(res)
     )
   }
 
-  update(trainer: Trainer){
+  update(trainer: Trainer) {
     if (this.editTrainer) {
       this.trainerService.updateTrainer(trainer)
-        .subscribe(trainer => {
-          // replace the hero in the heroes list with update from server
-          const ix = trainer ? this.trainers.findIndex(h => h.trainer_id === trainer.trainer_id) : -1;
-          if (ix > -1) { this.trainers[ix] = trainer; }
+        .subscribe( (response) => {
+          alert(response);
         });
-      this.editTrainer = undefined;
-    }
-   
-  }
-  delete(trainer: Trainer){
-    this.trainers = this.trainers.filter( tr => tr !== trainer)
-    this.trainerService.deleteTrainer(trainer.trainer_id).subscribe();
-  }
+   }
+ }
+
+  // delete(id) {
+  //   this.trainerService.deleteTrainer(id).subscribe();
+  // }
 }

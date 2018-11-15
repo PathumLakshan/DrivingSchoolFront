@@ -7,16 +7,22 @@ import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../_helpers/http-error-handler.service';// to access different directory need to use ..
 import { Candidate } from '../_models/candidate';
 
+import { environment } from '../../environments/environment';
+    
+
 const httOptions ={
   headers: new HttpHeaders({
     'Content-Type':'application/json',
-    "Authorization" : 'Bearer'+' '+ localStorage.getItem('token')
+    'Authorization' : 'Bearer'+' '+ sessionStorage.getItem('token')
   })
 };
 
 @Injectable()
 export class CandidateService {
-apiurl = 'https://localhost:44323/api/candidate';
+  // api url from env.
+  URL = environment.API_URL;
+  apiurl = this.URL+'candidate';
+
 private handleError : HandleError
 
   constructor(

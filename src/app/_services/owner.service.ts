@@ -9,16 +9,19 @@ import { HttpErrorHandler, HandleError } from '../_helpers/http-error-handler.se
 import { Owner } from "../_models/owner";
 
 
-const httOptions ={
+import { environment } from '../../environments/environment';
+
+const httpOptions ={
   headers: new HttpHeaders({
     'Content-Type':'application/json',
-    "Authorization" : 'Bearer'+' '+ localStorage.getItem('token')
+    'Authorization' : 'Bearer'+' '+ sessionStorage.getItem('token')
   })
 };
 
 @Injectable()
 export class OwnerService {
-apiurl = 'https://localhost:44323/api/owner';
+  URL = environment.API_URL;
+apiurl = this.URL +'owner';
 private handleError : HandleError
 
   constructor(
@@ -28,7 +31,7 @@ private handleError : HandleError
       }
   
     getOwner(): Observable<Owner[]>{
-      return this.http.get<Owner[]>(this.apiurl)
+      return this.http.get<Owner[]>(this.apiurl,httpOptions)
                   .pipe(
                     catchError(this.handleError('getOwner', []))
                   );
@@ -36,7 +39,7 @@ private handleError : HandleError
 
     addOwner(owner: Owner): Observable<Owner>{
       return this.http.post<Owner>(
-        this.apiurl, owner,httOptions).pipe(
+        this.apiurl, owner,httpOptions).pipe(
           catchError(this.handleError('addOwner',owner))
         );
     }

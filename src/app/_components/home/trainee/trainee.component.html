@@ -1,52 +1,193 @@
 <div class="container">
-      
-    <mdb-card>
-        <mdb-card-body>
-          <mdb-card-title><h3>New Trainee</h3></mdb-card-title>
-            <form name="form" (ngSubmit)="add()" #f="ngForm">
+    <!-- #region View-->
+        <mdb-card *ngIf="RoleId ==1">
+            <mdb-card-body>
+              <mdb-card-title>
+                <div class="row">
+                  <div class="col-4">
+                      <h3>Trainees Information</h3>
+                  </div>
+                  <div class="col-4">
+                      <div *ngIf='loading' style="padding-left:50%; padding-right: 50%">
+                          <img src="assets/SpinLoader.gif" width="50" alt="" id="loader">
+                      </div>
+                  </div>
+                  <div class="col-4">
+                      <div class="text-center" style="float: right;">
+                          <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">
+                              <i class="fa fa-plus" aria-hidden="true"></i></a>
+                        </div>
+                  </div>
+                </div>
+              </mdb-card-title>
+              <!--Table-->
+  <table id="TraineeInfo" class="table table-hover table-bordered">
+      <!--Table head-->
+        <thead>
+          <tr>
+            <th>Trainee ID</th>
+            <th>Trainee Name</th>
+            <th>Address</th>
+            <th>NIC</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+        <!--Table body-->
+        <tbody>
+          <tr *ngFor=" let trainee of trainees">
+            <td>{{ trainee.reg_id }}</td>
+            <td>{{ trainee.trainee_name }}</td>
+            <td>{{ trainee.trainee_address }}</td>
+            <td>{{ trainee.trainee_nic}}</td>
+            <td>
+              <button type="button" class="btn btn-primary px-3" (click)="getId(trainee.reg_id)">
+                <i class="fa fa-edit fa-lg mr-1"></i></button>
+              <button type="button" class="btn btn-primary px-3" (click)="getId(trainee.reg_id)">
+                <i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        </tbody>
+        <!--Table body-->
+      </table>
+  
+    <div class="alert alert-success" *ngIf="trainees == null">
+        <a (click)="getTrainee()" >
+          <h5 style="padding-left: 40%">Load Data<span>&nbsp;</span>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </h5>
+        </a>
+    </div>
+  
+    
+      <!--Table-->        
+            </mdb-card-body>
+          </mdb-card>
+    <!-- #endregion -->
 
-                <div class="form group">
-                    <label for="exampleFormControlInput1">Trainer Name</label>
-                    <input type="text" class="form-control" name="name" [(ngModel)] = "trainee.trainee_name">
-                  
+    <!-- #region View-->
+        <mdb-card *ngIf="RoleId !== 1">
+            <mdb-card-body>
+              <mdb-card-title>
+                <div class="row">
+                  <div class="col-4">
+                      <h3>Trainees Information</h3>
+                  </div>
+                  <div class="col-4">
+                      <div *ngIf='loading' style="padding-left:50%; padding-right: 50%">
+                          <img src="assets/SpinLoader.gif" width="50" alt="" id="loader">
+                      </div>
+                  </div>
+                 
                 </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Join Date</label>
-                  <input type="date" class="form-control" name="joindate" [(ngModel)]="trainee.join_date">
+              </mdb-card-title>
+              <!--Table-->
+  <table id="TraineeInfo" class="table table-hover table-bordered">
+      <!--Table head-->
+        <thead>
+          <tr>
+            <th>Trainee ID</th>
+            <th>Trainee Name</th>
+            <th>Address</th>
+            <th>NIC</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+        <!--Table body-->
+        <tbody>
+          <tr *ngFor=" let trainee of trainees">
+            <td>{{ trainee.reg_id }}</td>
+            <td>{{ trainee.trainee_name }}</td>
+            <td>{{ trainee.trainee_address }}</td>
+            <td>{{ trainee.trainee_nic}}</td>
+          </tr>
+        </tbody>
+        <!--Table body-->
+      </table>
+  
+    <div class="alert alert-success" *ngIf="trainees == null">
+        <a (click)="getTrainee()" >
+          <h5 style="padding-left: 40%">Load Data<span>&nbsp;</span>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </h5>
+        </a>
+    </div>
+  
+    
+      <!--Table-->        
+            </mdb-card-body>
+          </mdb-card>
+    <!-- #endregion -->
+  
+    
+  
+     <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">New Trainer</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form name="form" (ngSubmit)="add()" #f="ngForm">
+        <div class="form-group">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fa fa-user prefix grey-text"></i>
+            <label for="exampleFormControlInput1">Trainer Name</label>
+            <input type="text" class="form-control" name="name" [(ngModel)] = "trainee.trainee_name">
                   
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Number of Hours</label>
-                  <select class="form-control" name="noh" [(ngModel)]="trainee.no_of_hours">
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                    <option>40</option>
-                    <option>50</option>
-                  </select>
-                  
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect2">Training Type</label>
+          </div>
+          <div class="md-form mb-5">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <label for="exampleFormControlInput1">Join Date</label>
+            <input type="date" class="form-control" name="joindate" [(ngModel)]="trainee.join_date">
+          </div>
+          
+          <div class="md-form mb-4">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="text" class="form-control validate" name="adress" id="adress" [(ngModel)]="trainee.trainee_address">
+            <label data-error="wrong" data-success="right" for="adress">Address:</label>
+          </div>
+          <div class="md-form mb-4">
+              <i class="fa fa-lock prefix grey-text"></i>
+              <label for="exampleFormControlSelect1">Number of Hours</label>
+              <select class="form-control" name="noh" [(ngModel)]="trainee.no_of_hours">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+              </select>
+            </div>
+            <div class="md-form mb-4">
+            <label for="exampleFormControlSelect2">Training Type</label>
                   <select class="form-control" name="type" [(ngModel)]="trainee.training_type">
                       <option>Type-A</option>
                       <option>Type-B</option>
                       <option>Type-C</option>
                     </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Candidate Name </label>
-                  <select class="form-control" (input)="onInput($event)" name="candid" [(ngModel)]="trainee.cand_id">
-                      <option *ngFor="let candidate of candidate" value={{candidate.c_id}}>{{ candidate.c_name}}</option>
-                    </select>
-                    
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-primary">Register</button>
-              </div>
-              </form>
-              </mdb-card-body>
-              </mdb-card>
-              
-</div>
+                    </div>
+            <div class="md-form mb-4">
+                <label for="exampleFormControlTextarea1">Candidate Name </label>
+                <select class="form-control" (input)="onInput($event)" name="candid" [(ngModel)]="trainee.cand_id">
+                    <option *ngFor="let candidate of candidate" value={{candidate.c_id}}>{{ candidate.c_name}}</option>
+                  </select>
+            </div>
+            
+
+         
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <button class="btn btn-deep-orange">Save</button>
+          </div>
+      </div>
+        
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  </div>
 

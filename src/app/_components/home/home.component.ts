@@ -1,4 +1,4 @@
-import { NgModule, Input }       from '@angular/core';
+import { NgModule, Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 import { HomeRoutingModule } from './Home_Routing.module';
@@ -23,50 +23,70 @@ import { filter } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-@Input('isHome') isHomeRoute:boolean;
-
 isLoggedIn: boolean;
-loading = false;
-userRole: string;
-schedules: any=[];
+userId: number;
+RoleId: number;
+schedules: any = [];
 pageIsChanged = false;
 isHome = false;
+loading: boolean;
+scheduleForTrainer: any = [];
+scheduleForTrainee: any = [];
 
-  constructor( 
+  constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private scheduleService: ScheduleService
     ) { }
-  
   ngOnInit() {
-    this.routerEventListner()
-    this.isLoggedIn = !!localStorage.getItem('token');
-    this.userRole = localStorage.getItem("role");
+    this.routerEventListner();
+    this.isLoggedIn = !!sessionStorage.getItem('token');
+    this.RoleId = parseInt(sessionStorage.getItem('roleId'));
+    this.userId = parseInt(sessionStorage.getItem('userId'));
   }
 
-  loadData(){
+  loadData() {
+    this.loading = true;
     this.scheduleService.getSchedule().subscribe(
-      (response) => this.schedules = response
-    )
+      (response) => {
+        this.schedules = response;
+        this.loading = false;
+    });
+    if ( this.RoleId === 2) {
+      this.loading = true;
+    this.scheduleService.getSchedulebyTraineeId(this.userId).subscribe(
+      (response) => {
+        this.scheduleForTrainee = response;
+      this.loading = false;
+    });
+    } else if ( this.RoleId === 3) {
+      this.loading = true;
+    this.scheduleService.getSchedulebyTraineeId(this.userId).subscribe(
+      (response) => {
+        this.scheduleForTrainer = response;
+      this.loading = false;
+    });
+    }
   }
 
-  routerEventListner():void{
+  routerEventListner(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
       ).subscribe((res: NavigationEnd) => {
-        if(res.url == '/home')
-        { this.isHome = true; console.log('is Home:True');console.log('is THome:_',this.isHome)}
-        else
-        { this.isHome = false; console.log('is Home:False');console.log('is FHome:_',this.isHome) }
+        if (res.url === '/home') {
+          this.isHome = true;
+        } else {
+          this.isHome = false;
+        }
     });
   }
 
-  LogOut(){
-    return new Promise((resolve) => {	
-      this.loading = true;    
+  LogOut() {
+    return new Promise((resolve) => {
+      this.loading = true;
       this.authenticationService.logout();
-      setTimeout(() =>{
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
         this.router.navigate(['login']);
       }, 3000);
       resolve();

@@ -9,25 +9,33 @@ import { Candidate } from '../../../_models/candidate';
   providers:[CandidateService]
 })
 export class CandidateComponent implements OnInit {
-candidate: any={};
-candidates: Candidate[]
+candidate: any = {};
+candidates: Candidate[];
+loading: boolean;
+RoleId: number;
 
   constructor(private candidateService: CandidateService) { }
 
   ngOnInit() {
-  this.get();
+  // this.get();
+  
+  this.RoleId = parseInt( sessionStorage.getItem('roleId'));
   }
 
-  get():void{
+  get(): void {
+    this.loading = true;
     this.candidateService.getCandidate().subscribe(
-      candidates => this.candidates = candidates
-    );
+      (candidates) => {
+        console.log(candidates)
+        this.candidates = candidates;
+        this.loading = false;
+      });
   }
 
   add(){
     console.log(this.candidate)
      this.candidateService.addCandidate(this.candidate).subscribe(
-       (res) => console.log('response',res)
+       (res) => console.log('response', res)
      );  
   }
 }

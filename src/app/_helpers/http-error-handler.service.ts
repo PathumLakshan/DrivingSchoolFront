@@ -5,19 +5,41 @@ import { Observable, of } from 'rxjs';
 
 import { MessageService } from './message.service';
 
-/** Type of the handleError function returned by HttpErrorHandler.createHandleError */
 export type HandleError =
   <T> (operation?: string, result?: T) => (error: HttpErrorResponse) => Observable<T>;
 
-/** Handles HttpClient errors */
 @Injectable()
 export class HttpErrorHandler {
   constructor(private messageService: MessageService) { }
 
-  /** Create curried handleError function that already knows the service name */
+ 
   createHandleError = (serviceName = '') => <T>
     (operation = 'operation', result = {} as T) => this.handleError(serviceName, operation, result);
 
+  handleError<T> (serviceName = '', operation = 'operation', result = {} as T) {
+
+    return (error: HttpErrorResponse): Observable<T> => {
+      // console.error(error);
+      // console.log('snak')
+      const message = (error.error instanceof ErrorEvent) ?
+      error.error.message :
+       `server returned code ${error.status} with body "${error.error}"`;
+
+      this.messageService.add(`${serviceName}: ${operation} failed: ${message}`);
+      this.messageService.showMessage(error.message);
+
+      return of(result)
+    };
+
+  }
+}
+
+
+/*
+
+
+/** Type of the handleError function returned by HttpErrorHandler.createHandleError */
+ /** Create curried handleError function that already knows the service name */
   /**
    * Returns a function that handles Http operation failures.
    * This error handler lets the app continue to run as if no error occurred.
@@ -25,28 +47,13 @@ export class HttpErrorHandler {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  handleError<T> (serviceName = '', operation = 'operation', result = {} as T) {
+ // TODO: send the error to remote logging infrastructure
 
-    return (error: HttpErrorResponse): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error);
        // log to console instead
-       alert('Opps'+ error.message);
-      const message = (error.error instanceof ErrorEvent) ?
-        error.error.message :
-       `server returned code ${error.status} with body "${error.error}"`;
 
       // TODO: better job of transforming error for user consumption
-      this.messageService.add(`${serviceName}: ${operation} failed: ${message}`);
 
       // Let the app keep running by returning a safe result.
-      return of( result );
-    };
-
-  }
-}
-
-
 /*
 Copyright 2017-2018 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

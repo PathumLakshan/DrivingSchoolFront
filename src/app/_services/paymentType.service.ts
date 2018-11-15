@@ -9,16 +9,20 @@ import { HttpErrorHandler, HandleError } from '../_helpers/http-error-handler.se
 import { PaymentType } from "../_models/paymentType";
 
 
+import { environment } from '../../environments/environment';
+
 const httOptions ={
   headers: new HttpHeaders({
     'Content-Type':'application/json',
-    "Authorization" : 'Bearer'+' '+ localStorage.getItem('token')
+    'Authorization' : 'Bearer'+' '+ sessionStorage.getItem('token')
   })
 };
 
 @Injectable()
 export class PaymentTypeService {
-apiurl = 'https://localhost:44323/api/paymenttype';
+  URL = environment.API_URL
+
+apiurl = this.URL+'paymenttype';
 private handleError : HandleError
 
   constructor(

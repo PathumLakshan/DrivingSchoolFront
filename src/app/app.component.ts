@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './_services/authentication.service';
-import { Router,NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -10,27 +10,27 @@ import { filter } from 'rxjs/operators';
 })
 
 export class AppComponent implements OnInit{
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
+  RoleId: number;
+  userId: number;
   isHome = false;
 
-  constructor(
-private router: Router
-){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
+    this.isLoggedIn = !!sessionStorage.getItem('token');
+    this.RoleId = parseInt(sessionStorage.getItem('roleId'));
+    this.userId = parseInt(sessionStorage.getItem('userId'));
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
       ).subscribe((res: NavigationEnd) => {
-        if(res.url == '/home')
-        { this.isHome = true; console.log('is Home:True');console.log('is THome:_',this.isHome)}
-        else
-        { this.isHome = false; console.log('is Home:False');console.log('is FHome:_',this.isHome) }
+        if(res.url === '/home') {
+          this.isHome = true;
+        } else {
+          this.isHome = false;
+        }
     });
-  
-    this.isLoggedIn = !!localStorage.getItem('token');
-    console.log('In app component:',this.isLoggedIn)
+    this.isLoggedIn = !!sessionStorage.getItem('token');
   }
-  title = 'DrivingSchool';
-  
 }
